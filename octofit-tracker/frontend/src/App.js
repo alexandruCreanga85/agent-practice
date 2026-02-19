@@ -1,29 +1,38 @@
 
+
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Activities from './components/Activities';
+import Leaderboard from './components/Leaderboard';
+import Teams from './components/Teams';
+import Users from './components/Users';
+import Workouts from './components/Workouts';
 
 function App() {
   return (
-    <div>
-      {/* Bootstrap Navigation */}
+    <Router>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">OctoFit Tracker</a>
+          <Link className="navbar-brand" to="/">OctoFit Tracker</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <Link className="nav-link" to="/activities">Activities</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#activities">Activities</a>
+                <Link className="nav-link" to="/teams">Teams</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#teams">Teams</a>
+                <Link className="nav-link" to="/users">Users</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#leaderboard">Leaderboard</a>
+                <Link className="nav-link" to="/workouts">Workouts</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/leaderboard">Leaderboard</Link>
               </li>
             </ul>
           </div>
@@ -31,23 +40,32 @@ function App() {
       </nav>
 
       <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div className="card shadow">
-              <div className="card-body">
-                <h1 className="card-title display-4 text-center mb-4">Welcome to OctoFit Tracker</h1>
-                <p className="card-text text-center">Track your fitness activities, join teams, and climb the leaderboard!</p>
-                <div className="d-flex justify-content-center mt-4">
-                  <a href="#activities" className="btn btn-primary mx-2">View Activities</a>
-                  <a href="#teams" className="btn btn-outline-primary mx-2">View Teams</a>
-                  <a href="#leaderboard" className="btn btn-success mx-2">Leaderboard</a>
+        <Routes>
+          <Route path="/" element={
+            <div className="row justify-content-center">
+              <div className="col-md-8">
+                <div className="card shadow">
+                  <div className="card-body">
+                    <h1 className="card-title display-4 text-center mb-4">Welcome to OctoFit Tracker</h1>
+                    <p className="card-text text-center">Track your fitness activities, join teams, and climb the leaderboard!</p>
+                    <div className="d-flex justify-content-center mt-4">
+                      <Link to="/activities" className="btn btn-primary mx-2">View Activities</Link>
+                      <Link to="/teams" className="btn btn-outline-primary mx-2">View Teams</Link>
+                      <Link to="/leaderboard" className="btn btn-success mx-2">Leaderboard</Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          } />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/workouts" element={<Workouts />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
